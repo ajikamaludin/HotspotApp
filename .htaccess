@@ -1,0 +1,4 @@
+RewriteEngine on
+Options All -Indexes
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
