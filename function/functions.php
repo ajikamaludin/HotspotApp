@@ -171,4 +171,17 @@ function edit_user($username,$password,$idGroup,$idUser,$oldName){
             }
             return run($sql);
 }
+
+//hapus pengguna
+function hapus_user($username){
+    $sql = "DELETE FROM `radcheck` WHERE `radcheck`.`username` = '$username'";
+    $result1 = run($sql);
+    $sql2 = "DELETE FROM `radusergroup` WHERE `radusergroup`.`username` = '$username'";
+    $result2 = run($sql2);
+    if($result1 && $result2){
+        return true;
+    }else{
+        return false;
+    }
+}
 ?>

@@ -35,13 +35,13 @@ include 'view/sidenav.php';
           $i = 0; 
           foreach($users as $user){
           ?> 
-            <tr id="data_<?= $user['id']?>">
+            <tr id="data_<?= $user['username']?>">
               <td> <?= $i++; ?> </td>
               <td> <?= $user['username'] ?> </td>
               <td> <?= $user['value'] ?> </td>
               <td> <?= tampil_group_by($user['username']) ?> </td>
               <td> <a href="user_edit.php?id=<?= $user['id'] ?>" title="Edit"><i class="material-icons">mode_edit</i></a>
-              <a href="#" class="hapus_post" data-id="<?= $user['id']?>" data-postid="<?= $user['id']?>" title="Hapus"><i class="material-icons">clear</i></a> </td>
+              <a href="#" class="hapusUser" data-id="<?= $user['username']?>" data-postid="<?= $user['username']?>" title="Hapus"><i class="material-icons">clear</i></a> </td>
             </tr>
           <?php
           }
