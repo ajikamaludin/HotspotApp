@@ -5,7 +5,8 @@
                         <img src="asset/images/background.jpg">
                     </div>
                     <a href="./foto_profile.php"><img class="circle" src="asset/images/empty-profile.png"></a>
-                    <a href="profile.php" style="padding-bottom:20px;" ><span class="white-text name"><?= tampil_nama($_SESSION['user']); ?> </span></a>
+                    <a href="profile.php" ><span class="white-text name"><?= tampil_nama($_SESSION['user']); ?> </span></a>
+                    <a href="profile.php" style="padding-bottom:20px;" ><span class="white-text name"><?= 'Aktiv : '.NAMA_SEKOLAH ?> </span></a>
                     </div>
                 </li>
             <li><a class="waves-effect" href="index.php">Dashboard</a></li>

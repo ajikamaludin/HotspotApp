@@ -125,6 +125,13 @@ function tampil_group(){
     return $result;
 }
 
+//Menampilkan groupreply attribute
+function tampil_group_attribute($groupname){
+    $sql = " SELECT `id`,`attribute`,`op`,`value` FROM `radgroupreply` WHERE groupname='$groupname'";
+    //die(print_r($sql));
+    $result = result($sql);
+    return $result;
+}
 //menambahkan pengguna dan merelasikan ke usergroup
 function tambah_user($username,$password,$groupname){
         $username = cek_string($username);

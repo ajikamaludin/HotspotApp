@@ -18,6 +18,10 @@ include 'view/sidenav.php';
 
     <h4 style="margin-bottom: 30px;">Hotspot Users</h4>
     
+    <div class="row" style="margin-bottom:50px;">
+      <a href="user_import.php" class="waves-effect waves-light btn">Import</a>
+      <!--<a class="waves-effect waves-light btn">Export</a>-->
+    </div>
       <div class="row" id="data-table">
         <div class="row" >
           <table class="responsive-table highlight" id="table_id" width="100%" cellspacing="0" data-page-length='25'>
@@ -41,7 +45,8 @@ include 'view/sidenav.php';
               <td> <?= $user['value'] ?> </td>
               <td> <?= tampil_group_by($user['username']) ?> </td>
               <td> <a href="user_edit.php?id=<?= $user['id'] ?>" title="Edit"><i class="material-icons">mode_edit</i></a>
-              <a href="#" class="hapusUser" data-id="<?= $user['username']?>" data-postid="<?= $user['username']?>" title="Hapus"><i class="material-icons">clear</i></a> </td>
+              <a href="#" class="hapusUser" data-id="<?= $user['username']?>" data-postid="<?= $user['username']?>" title="Hapus"><i class="material-icons">clear</i></a>
+              </td>
             </tr>
           <?php
           }
