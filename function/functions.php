@@ -314,15 +314,15 @@ function upload_user($file){
     if($errorFile == 0){
         move_uploaded_file($tmpFile,$simpan);
         $csvFile = fopen($simpan, 'r');
-        fgetcsv($csvFile);
+        //fgetcsv($csvFile);
         while(($line = fgetcsv($csvFile)) != FALSE){
 
             $user = cek_string($line[0]);//username
             $password = cek_string($line[1]);//password
             $groupname = cek_string($line[2]);//groupname
-            $upload = cek_string($line[3]);//attr up
-            $download = cek_string($line[4]);//attr down
-            $session = cek_string($line[5]);//attr session
+            $upload = cek_string($line[3] * 1024);//attr up
+            $download = cek_string($line[4] * 1024);//attr down
+            $session = cek_string($line[5] * 60);//attr session
             $url = cek_string($line[6]);//attr url
 
             tambah_user($user,$password,$groupname);
@@ -347,5 +347,33 @@ function upload_user($file){
     }else{
         return false;
     } 
+}
+
+//cek jumlah pengguna
+function cek_jumlah_pengguna(){
+    $sql = "SELECT username FROM radcheck";
+    $result = result($sql);
+    return mysqli_num_rows($result);
+}
+
+//cek jumlah group
+function cek_jumlah_group(){
+    $sql = " SELECT groupname FROM `radgroupreply` GROUP BY groupname";
+    $result = result($sql);
+    return mysqli_num_rows($result);
+}
+
+//cek jumlah login
+function cek_jumlah_login(){
+    $sql = "SELECT id FROM `radpostauth` ";
+    $result = result($sql);
+    return mysqli_num_rows($result);
+}
+
+//menampilkan log login pengguna
+function tampil_login_log(){
+    $sql = "SELECT username, reply, authdate FROM `radpostauth`  ORDER BY `radpostauth`.`authdate` DESC";
+    $result = result($sql);
+    return $result; 
 }
 ?>

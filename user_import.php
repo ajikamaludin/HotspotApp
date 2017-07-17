@@ -9,9 +9,9 @@ if(isset($_POST['submit'])){
   $file = $_FILES['userfile'];
   $upload = upload_user($file);
   if($upload){
-    $pesan = "Upload Sukses";
+      header('Location: user.php');
   }else{
-    $pesan = "Upload Gagal";
+    $error = "Upload Gagal";
   }
 }
 
@@ -37,7 +37,7 @@ include 'view/sidenav.php';
           <div class="row">
               <form class="col s12" method="POST" enctype="multipart/form-data">
               <div class="row">
-                  <div class="input-field col s6">
+                  <div class="input-field col s8">
                     <div class="file-field input-field">
                       <div class="btn">
                         <span>File</span>
@@ -57,18 +57,19 @@ include 'view/sidenav.php';
           </div>
           <div class="row" style="margin-top:70px;">
               <div class="row">
-                <div class="col s6">
+                <div class="col s8">
                   <p> File Dalam bentuk CSV dengan format dibawah ini </p>
                   <p> Username, Password, GroupName, Max Upload,Max Download,Session Time,URL</p>
                 </div>
               </div>
               <div class="row">
-                <div class="input-field col s6">
-                  <textarea id="textarea1" class="materialize-textarea" data-length="120">aji,passaji,groupsiswa,10200,21031,60,http://smknet.id
-                  </textarea>
+                <div class="input-field col s8">
+                  <textarea id="textarea1" class="materialize-textarea" data-length="120">aji,passaji,groupsiswa,10200,21031,60,http://smknet.id</textarea>
                   <label for="textarea1">Contoh</label>
                 </div>
               </div>
+      </div>
+      </div>
 <?php
 include 'view/footer.php';
 ?>

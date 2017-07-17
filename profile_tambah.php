@@ -73,6 +73,7 @@ include 'view/sidenav.php';
                   <button class="btn waves-effect waves-light" type="submit" name="submit"> Simpan </button>
               </form>
           </div>
+          </div>
 <?php
 include 'view/footer.php';
 ?>

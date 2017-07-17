@@ -21,20 +21,22 @@ if(isset($_POST['submit'])){
 ?>
 
 <div class="container">
-<div class="row"></div>
+
+<div class="row"><!--Empty Row--></div>
+
     <div class="row">
 
-      <div class="col m6">
-      <div>
-        <h2> <?= APPNAME ?> </h2>
-      </div>
+        <div class="col s12 m6">
+        <div style="margin-bottom:70px;">
+            <h2> <?= APPNAME ?> </h2>
+        </div>
         <div class="row">
             <form class="col s12" method="POST">
                 <div class="row">
                     <div class="input-field col s12">
                         <input id="username" type="text" class="validate" name="username">
                         <label for="username" data-error="wrong" data-success="right">Username</label>
-                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
@@ -51,10 +53,13 @@ if(isset($_POST['submit'])){
         <?php
             echo "".$error."";
         ?>
-      </div>
+        </div>
 
       <div class="col m6"><!-- DIV KOSONG --></div>
-    </div>
+
+</div>
+</div>
+</div>
 
 
 <?php

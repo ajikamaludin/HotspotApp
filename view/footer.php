@@ -11,10 +11,28 @@
         } );
       </script>
     </body>
-<footer style="height:142px;;bottom: 0;">
-  <p>Support by <a href="http://ajikamaludin.id">Aji Kamaludin</a>, Donation and Help to Fork it On 
-  <a href="https://github.com/ajikamaludin/HotstopApp">GitHub</a>
-  <p>Perawatan dan Installasi Oleh <a href="http://blctelkom.id"> IT TIM BLC-Telkom Klaten </a> 
-  dan <a href="http://smknet.id"> SMKNet.id </a> </p>
-</footer>
+<div class="container">
+
+<?php
+if(isset($_SESSION['user'])){
+?>
+  <div class="container">
+<?php
+}
+?>
+  <footer style="height:142px;;bottom: 0;">
+    <p>Support by <a href="http://ajikamaludin.id">Aji Kamaludin</a>, Donation and Help to Fork it On 
+    <a href="https://github.com/ajikamaludin/HotstopApp">GitHub</a>
+    <p>Perawatan dan Installasi Oleh <a href="http://blctelkom.id"> IT TIM BLC-Telkom Klaten </a> dan <a href="http://smknet.id"> SMKNet.id </a> </p>
+  </footer>
+
+<?php
+  if(isset($_SESSION['user'])){
+?>
+  </div>
+<?php
+}
+?>
+
+</div>
 </html>

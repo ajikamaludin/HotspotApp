@@ -61,6 +61,7 @@ include 'view/sidenav.php';
             </a>
           </div>
       </div>
+    </div>
 
 <?php
 include 'view/footer.php';
