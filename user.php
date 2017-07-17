@@ -24,7 +24,7 @@ include 'view/sidenav.php';
     </div>
       <div class="row" id="data-table">
         <div class="row" >
-          <table class="responsive-table highlight" id="table_id" width="100%" cellspacing="0" data-page-length='25'>
+          <table class="responsive-table highlight" id="table_id" width="100%" cellspacing="0" data-page-length='10'>
           <thead>
             <tr>
                 <th>No</th>
@@ -36,7 +36,7 @@ include 'view/sidenav.php';
           </thead>
           <tbody>
           <?php
-          $i = 0; 
+          $i = 1; 
           foreach($users as $user){
           ?> 
             <tr id="data_<?= $user['username']?>">

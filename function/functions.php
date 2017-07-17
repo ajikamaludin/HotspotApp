@@ -142,6 +142,7 @@ function tambah_user($username,$password,$groupname){
             $sql = "INSERT INTO `radcheck` (`id`, `username`, `attribute`, `op`, `value`) VALUES (NULL, '$username', 'User-Password', ':=', '$password')";
             if($groupname == null){
                 //group tidak di tambahkan
+                die();
             }else{
                 $groupname = cek_string($groupname);
                 $sql2 = "INSERT INTO `radusergroup` (`id`, `username`, `groupname`, `priority`) VALUES (NULL, '$username', '$groupname', '10')";
@@ -184,6 +185,108 @@ function hapus_user($username){
     $sql = "DELETE FROM `radcheck` WHERE `radcheck`.`username` = '$username'";
     $result1 = run($sql);
     $sql2 = "DELETE FROM `radusergroup` WHERE `radusergroup`.`username` = '$username'";
+    $result2 = run($sql2);
+    if($result1 && $result2){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+//Menambahkan User Profile - Group
+function tambah_group($groupname,$session,$download,$upload,$url){
+        $groupname = cek_string($groupname);
+        $session = cek_string($session);
+        $download = cek_string($download);
+        $upload = cek_string($upload);
+        $url= cek_string($url);
+
+        $MenitSession = $session * 60;
+
+        $biteDownload = $download * 1024;
+        $biteUpdaload = $upload * 1024;
+
+        $sql1 = "INSERT INTO `radgroupreply` (`id`, `groupname`, `attribute`, `op`, `value`) VALUES (NULL, '$groupname', 'Session-Timeout', ':=', '$MenitSession');";
+        if(run($sql1)){
+            $sql2 = "INSERT INTO `radgroupreply` (`id`, `groupname`, `attribute`, `op`, `value`) VALUES (NULL, '$groupname', 'WISPr-Bandwidth-Max-Up', ':=', '$biteUpdaload');";
+            if(run($sql2)){
+                $sql3 = "INSERT INTO `radgroupreply` (`id`, `groupname`, `attribute`, `op`, `value`) VALUES (NULL, '$groupname', 'WISPr-Bandwidth-Max-Down', ':=', '$biteDownload');";
+                if(run($sql3)){
+                    $sql4 = "INSERT INTO `radgroupreply` (`id`, `groupname`, `attribute`, `op`, `value`) VALUES (NULL, '$groupname', 'WISPr-Redirection-URL', ':=', '$url');";
+                    if(run($sql4)){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+       
+}
+
+//Menampilkan Group dan attribute berdasarkan nama
+function tampil_groupprofile_by($groupname){
+    $groupname = cek_string($groupname);
+    $sql = "SELECT id,groupname,attribute,op,value FROM `radgroupreply` WHERE groupname = '$groupname'";
+    $result = result($sql);
+    foreach($result as $res){
+        $data[] = $res['value'];
+    }
+    //die(print_r($data));
+    $data[0] = $data[0] / 60;
+    $data[1] = $data[1] / 1024;
+    $data[2] = $data[2] / 1024;
+    return $data;
+}
+
+//Menambahkan User Profile - Group
+function ubah_group($groupname,$session,$download,$upload,$url,$oldName){
+        $groupname = cek_string($groupname);
+        $session = cek_string($session);
+        $download = cek_string($download);
+        $upload = cek_string($upload);
+        $url= cek_string($url);
+        $oldName = cek_string($oldName);
+
+        $MenitSession = $session * 60;
+
+        $biteDownload = $download * 1024;
+        $biteUpdaload = $upload * 1024;
+        $sql1 = "UPDATE `radgroupreply` SET `groupname` = '$groupname',`value` = '$MenitSession' WHERE `radgroupreply`.`groupname` = '$oldName' AND `radgroupreply`.`attribute` = 'Session-Timeout' ";
+        if(run($sql1)){
+            $sql2 = "UPDATE `radgroupreply` SET `groupname` = '$groupname',`value` = '$biteUpdaload' WHERE `radgroupreply`.`groupname` = '$oldName' AND `radgroupreply`.`attribute` = 'WISPr-Bandwidth-Max-Up' ";
+            if(run($sql2)){
+                $sql3 = "UPDATE `radgroupreply` SET `groupname` = '$groupname',`value` = '$biteDownload' WHERE `radgroupreply`.`groupname` = '$oldName' AND `radgroupreply`.`attribute` = 'WISPr-Bandwidth-Max-Down' ";
+                if(run($sql3)){
+                    $sql4 = "UPDATE `radgroupreply` SET `groupname` = '$groupname',`value` = '$url' WHERE `radgroupreply`.`groupname` = '$oldName' AND `radgroupreply`.`attribute` = 'WISPr-Redirection-URL' ";
+                    if(run($sql4)){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+       
+}
+
+//hapus group
+function hapus_group($groupname){
+    $sql = "DELETE FROM `radgroupreply` WHERE `radgroupreply`.`groupname` = '$groupname'";
+    $result1 = run($sql);
+    $sql2 = "DELETE FROM `radusergroup` WHERE `radusergroup`.`groupname` = '$groupname'";
     $result2 = run($sql2);
     if($result1 && $result2){
         return true;

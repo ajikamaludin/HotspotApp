@@ -11,7 +11,7 @@
         } );
       </script>
     </body>
-<footer style="height:142px;position: absolute;bottom: 0;">
+<footer style="height:142px;;bottom: 0;">
   <p>Support by <a href="http://ajikamaludin.id">Aji Kamaludin</a>, Donation and Help to Fork it On 
   <a href="https://github.com/ajikamaludin/HotstopApp">GitHub</a>
   <p>Perawatan dan Installasi Oleh <a href="http://blctelkom.id"> IT TIM BLC-Telkom Klaten </a> 

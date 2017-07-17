@@ -20,9 +20,10 @@ include 'view/sidenav.php';
 
       <div class="row" id="data-table">
         <div class="row" >
-          <table class="responsive-table striped" id="table_id" width="100%" cellspacing="0" data-page-length='25'>
+          <table class="responsive-table striped" id="table_id" width="100%" cellspacing="0" data-page-length='5'>
           <thead>
             <tr>
+                <th>No</th>
                 <th>Nama Profile</th>
                 <th>Attribut</th>
                 <th>Hapus</th>
@@ -30,9 +31,11 @@ include 'view/sidenav.php';
           </thead>
           <tbody>
           <?php
+          $i = 1;
           foreach($groups as $group){
           ?> 
-            <tr id="data_<?= $group['id']?>">
+            <tr id="data_<?= $group['groupname']?>">
+              <td><?= $i++ ?></td>
               <td> <?= $group['groupname'] ?> </td>
               <td> <?php 
                     $groupattrs = tampil_group_attribute($group['groupname']);
@@ -40,8 +43,8 @@ include 'view/sidenav.php';
                       echo $atts['attribute'].' : '.$atts['value'].'<br>';
                     }
                ?> </td>
-              <td> <a href="" title="Edit"><i class="material-icons">mode_edit</i></a>
-              <a href="#" class="hapusUser" data-id="<?= $group['id']?>" data-postid="<?= $group['id']?>" title="Hapus"><i class="material-icons">clear</i></a>
+              <td> <a href="profile_edit.php?name=<?= $group['groupname'] ?>" title="Edit"><i class="material-icons">mode_edit</i></a>
+              <a href="#" class="hapusGroup" data-id="<?= $group['groupname']?>" data-postid="<?= $group['groupname']?>" title="Hapus"><i class="material-icons">clear</i></a>
               </td>
             </tr>
           <?php

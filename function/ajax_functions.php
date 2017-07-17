@@ -13,6 +13,14 @@ if($aksi == 'hapusUser'){
 	}else{
 		echo "1";
 	}
+}else if($aksi == 'hapusGroup'){
+	$group = $_POST['id'];
+	$hasil = hapus_group($group);
+	if($hasil){
+		echo "0";
+	}else{
+		echo "1";
+	}
 }else{
 	echo "1";
 }

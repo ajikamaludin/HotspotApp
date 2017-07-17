@@ -54,8 +54,8 @@ include 'view/sidenav.php';
                   </div>
 
                   <div class="row">
-                    <div class="input-field col s6">
-                      <select name="group" required>
+                    <div class="input-field col s6" class="validate">
+                      <select name="group" required >
                               <option name="group" value="0" disabled selected>Pilih Group</option>
                               <?php
                                 while( $group = mysqli_fetch_assoc($groups)){
