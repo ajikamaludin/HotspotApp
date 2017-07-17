@@ -60,9 +60,9 @@ function cek_pengguna($username,$password){
 //Memeriksa Username
 function cek_user_by($username){
     $username = cek_string($username);
-    $sql = "SELECT username FROM `AppUsers` WHERE username='$username'";
+    $sql = "SELECT username FROM `radcheck` WHERE username='$username'";
     $result = result($sql);
-    if(mysqli_num_rows($result) == 0){
+    if(mysqli_num_rows($result) != 0){
         return true;
     }else{
         return false;
@@ -80,6 +80,18 @@ function tampil_users(){
     return $result; 
 }
 
+//Mempilkan Pengguna dengan ID
+function tampil_user_by($id){
+    $sql = "SELECT id, username, attribute, op, value FROM `radcheck` WHERE id='$id'";
+    $result = result($sql);
+    if(!$result){
+        echo "hasil query salah";
+        return;
+    }
+    $result = mysqli_fetch_assoc($result);
+    return $result; 
+}
+
 //Memerisa Nama Group Dari Pengguna
 function tampil_group_by($username){
     $sql = "SELECT username,groupname FROM `radusergroup` WHERE username='$username'";
@@ -89,9 +101,21 @@ function tampil_group_by($username){
         $group = $result['groupname'];
         return $group;
     }else{
-        return 'Tidak Ada';
-    }
-    
+        return null;
+    }  
+}
+
+//Memerisa Id Group Dari Pengguna
+function tampil_groupId_by($username){
+    $sql = "SELECT username,groupname FROM `radusergroup` WHERE username='$username'";
+    $result = result($sql);
+    if(mysqli_num_rows($result) != 0){
+        $result = mysqli_fetch_assoc($result);
+        $id = $result['id'];
+        return $id;
+    }else{
+        return null;
+    }  
 }
 
 //Menampilkan Satu Per Semua Group dari Groupreply
@@ -118,7 +142,33 @@ function tambah_user($username,$password,$groupname){
             }
             return run($sql);
         }
-
 }
 
+//mengubah pengguna dan merelasikan ke usergroup
+function edit_user($username,$password,$idGroup,$idUser,$oldName){
+        $username = cek_string($username);
+        $password = cek_string($password);
+        $idUser = cek_string($idUser);
+        $groupname = cek_string($idGroup);
+        $group = gettype($idGroup);
+        
+            $sql = "UPDATE `radcheck` SET `username` = '$username', `value` = '$password' WHERE `radcheck`.`id` = '$idUser'";
+
+            if($group == 'interger'){
+                //group diubah dengan id
+                $groupname = cek_string($idGroup);
+                $sql2 = "UPDATE `radusergroup` SET `username` = '$username' WHERE `radusergroup`.`id` = '$idGroup'";
+                die(print_r($sql2));
+                run($sql2);
+            }else if($group == 'string'){
+                $oldName = cek_string($oldName);
+                $sql2 = "DELETE FROM `radusergroup` WHERE `radusergroup`.`username` = '$oldName'";
+                run($sql2);
+                $sql3 = "INSERT INTO `radusergroup` (`id`, `username`, `groupname`, `priority`) VALUES (NULL, '$username', '$groupname', '10')";
+                run($sql3); 
+            }else{
+                die(print_r($group));
+            }
+            return run($sql);
+}
 ?>

@@ -23,6 +23,7 @@ include 'view/sidenav.php';
           <table class="responsive-table highlight" id="table_id" width="100%" cellspacing="0" data-page-length='25'>
           <thead>
             <tr>
+                <th>No</th>
                 <th>Username</th>
                 <th>Password</th>
                 <th>Profile</th>
@@ -31,13 +32,15 @@ include 'view/sidenav.php';
           </thead>
           <tbody>
           <?php
+          $i = 0; 
           foreach($users as $user){
           ?> 
             <tr id="data_<?= $user['id']?>">
+              <td> <?= $i++; ?> </td>
               <td> <?= $user['username'] ?> </td>
               <td> <?= $user['value'] ?> </td>
               <td> <?= tampil_group_by($user['username']) ?> </td>
-              <td> <a href="." title="Edit"><i class="material-icons">mode_edit</i></a>
+              <td> <a href="user_edit.php?id=<?= $user['id'] ?>" title="Edit"><i class="material-icons">mode_edit</i></a>
               <a href="#" class="hapus_post" data-id="<?= $user['id']?>" data-postid="<?= $user['id']?>" title="Hapus"><i class="material-icons">clear</i></a> </td>
             </tr>
           <?php

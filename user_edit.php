@@ -14,10 +14,12 @@ $error = null;
 if(isset($_POST['submit'])){
   $username = $_POST['username'];
   $password = $_POST['password'];
-  $groupname = $_POST['group'];
-  $run = tambah_user($username,$password,$groupname);
+  $group = $_POST['group'];
+  $oldname = $user['username'];
+  $run = edit_user($username,$password,$group,$id,$oldname);
   if($run){
-    $error = "User ditambahkan";
+    $error = "User diubah";
+    header('Location: user.php');
   }else{
     $error = "Tidak dapat menambahkan user";
   }
@@ -35,7 +37,7 @@ include 'view/sidenav.php';
       <!--main content-->
         <div class="col s12 m8">
 
-          <h4 style="margin-bottom: 70px;margin-top:50px;">Tambah Hotspot Users</h4>
+          <h4 style="margin-bottom: 70px;margin-top:50px;">Ubah Hotspot Users</h4>
           
           <div style="margin:40px;">
               <blockquote> <?= $error ?> </blockquote>
@@ -45,14 +47,14 @@ include 'view/sidenav.php';
               <form class="col s12" method="POST">
                   <div class="row">
                       <div class="input-field col s6">
-                          <input id="username" placeholder="user01" type="text" class="validate" name="username" required>
+                          <input id="username" placeholder="user01" type="text" class="validate" name="username" required value=<?= $user['username']?>>
                           <label for="username" data-error="wrong" data-success="right">Username</label>
                       </div>
                   </div>
 
                   <div class="row">
                       <div class="input-field col s6">
-                          <input id="password" type="password" class="validate" name="password" required>
+                          <input id="password" type="password" class="validate" name="password" required value=<?= $user['value']?>>
                           <label for="password">Password</label>
                       </div>
                   </div>
@@ -60,7 +62,7 @@ include 'view/sidenav.php';
                   <div class="row">
                     <div class="input-field col s6">
                       <select name="group" required>
-                              <option name="group" value="0" disabled selected>Pilih Group</option>
+                              <option name="group" value="<?=tampil_groupId_by($user['username'])?>" selected> <?=tampil_group_by($user['username'])?> </option>
                               <?php
                                 while( $group = mysqli_fetch_assoc($groups)){
                               ?>
@@ -73,16 +75,10 @@ include 'view/sidenav.php';
                     </div>
                   </div>
 
-                  <button class="btn waves-effect waves-light" type="submit" name="submit"> Tambah </button>
+                  <button class="btn waves-effect waves-light" type="submit" name="submit"> Simpan </button>
 
               </form>
           </div>
-          <div class="fixed-action-btn" style="bottom: 25px; right: 24px;">
-              <a class="btn-floating btn-large red" href=".">
-                <i class="material-icons">add_circle_outline</i>
-              </a>
-            </div>
-        </div>
 
 <?php
 include 'view/footer.php';

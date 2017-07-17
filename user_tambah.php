@@ -69,18 +69,10 @@ include 'view/sidenav.php';
                     </div>
                   </div>
 
-                  <button class="btn waves-effect waves-light" type="submit" name="submit"> Tambah </button>
+                  <button class="btn waves-effect waves-light" type="submit" name="submit"> Simpan </button>
 
               </form>
           </div>
-          </div>
-          <div class="fixed-action-btn" style="bottom: 25px; right: 24px;">
-              <a class="btn-floating btn-large red" href=".">
-                <i class="material-icons">add_circle_outline</i>
-              </a>
-            </div>
-        </div>
-
 <?php
 include 'view/footer.php';
 ?>

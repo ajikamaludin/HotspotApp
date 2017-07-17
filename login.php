@@ -23,11 +23,8 @@ if(isset($_POST['submit'])){
 <div class="container">
 <div class="row"></div>
     <div class="row">
-      <div class="col m1">
-      <!--DIV KOSONG-->
-      </div>
 
-      <div class="col m5">
+      <div class="col m6">
       <div>
         <h2> <?= APPNAME ?> </h2>
       </div>
