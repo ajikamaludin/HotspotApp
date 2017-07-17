@@ -294,4 +294,58 @@ function hapus_group($groupname){
         return false;
     }
 }
+//cek group
+function cek_group($groupname,$attr){
+    $sql = "SELECT groupname,attribute FROM radgroupreply WHERE groupname = '$groupname' AND attribute='$attr'";
+    $result = result($sql);
+    if(mysqli_num_rows($result) == 0){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+//import user
+function upload_user($file){
+    $namaFile = $file['name'];
+    $tmpFile = $file['tmp_name'];
+    $simpan = 'asset/'.$namaFile;
+    $errorFile = $file['error'];
+    if($errorFile == 0){
+        move_uploaded_file($tmpFile,$simpan);
+        $csvFile = fopen($simpan, 'r');
+        fgetcsv($csvFile);
+        while(($line = fgetcsv($csvFile)) != FALSE){
+
+            $user = cek_string($line[0]);//username
+            $password = cek_string($line[1]);//password
+            $groupname = cek_string($line[2]);//groupname
+            $upload = cek_string($line[3]);//attr up
+            $download = cek_string($line[4]);//attr down
+            $session = cek_string($line[5]);//attr session
+            $url = cek_string($line[6]);//attr url
+
+            tambah_user($user,$password,$groupname);
+            if(cek_group($groupname,'Session-Timeout')){
+                $sqlSession = "INSERT INTO `radgroupreply` (`id`, `groupname`, `attribute`, `op`, `value`) VALUES (NULL, '$groupname', 'Session-Timeout', ':=', '$session');";
+                run($sqlSession);
+            }
+            if(cek_group($groupname,'WISPr-Bandwidth-Max-Up')){
+                $sqlUp = "INSERT INTO `radgroupreply` (`id`, `groupname`, `attribute`, `op`, `value`) VALUES (NULL, '$groupname', 'WISPr-Bandwidth-Max-Up', ':=', '$upload');";
+                run($sqlUp);
+            }
+            if(cek_group($groupname,'WISPr-Bandwidth-Max-Down')){
+                $sqlDown = "INSERT INTO `radgroupreply` (`id`, `groupname`, `attribute`, `op`, `value`) VALUES (NULL, '$groupname', 'WISPr-Bandwidth-Max-Down', ':=', '$download');";
+                run($sqlDown);
+            }
+            if(cek_group($groupname,'WISPr-Redirection-URL')){
+                $sqlUrl = "INSERT INTO `radgroupreply` (`id`, `groupname`, `attribute`, `op`, `value`) VALUES (NULL, '$groupname', 'WISPr-Redirection-URL', ':=', '$url');";
+                run($sqlUrl);
+            }
+
+        }
+    }else{
+        return false;
+    } 
+}
 ?>

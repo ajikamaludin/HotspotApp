@@ -5,6 +5,17 @@ session_cek();
 //Error Null
 $error = null;
 
+if(isset($_POST['submit'])){
+  $file = $_FILES['userfile'];
+  $upload = upload_user($file);
+  if($upload){
+    $pesan = "Upload Sukses";
+  }else{
+    $pesan = "Upload Gagal";
+  }
+}
+
+
 ?>
     <div class="row">
 
@@ -24,7 +35,7 @@ include 'view/sidenav.php';
           </div>
 
           <div class="row">
-              <form class="col s12" method="POST">
+              <form class="col s12" method="POST" enctype="multipart/form-data">
               <div class="row">
                   <div class="input-field col s6">
                     <div class="file-field input-field">
