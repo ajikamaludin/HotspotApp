@@ -40,7 +40,7 @@ include 'view/sidenav.php';
               <td> <?php 
                     $groupattrs = tampil_group_attribute($group['groupname']);
                     foreach($groupattrs as $atts){
-                      echo $atts['attribute'].' : '.$atts['value'].'<br>';
+                      echo atts_convert($atts['attribute'],$atts['value']).'<br>';
                     }
                ?> </td>
               <td> <a href="profile_edit.php?name=<?= $group['groupname'] ?>" title="Edit"><i class="material-icons">mode_edit</i></a>

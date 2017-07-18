@@ -377,4 +377,19 @@ function tampil_login_log(){
     $result = result($sql);
     return $result; 
 }
+
+//manampilkan atribute profile
+function atts_convert($attr,$value){
+    if($attr == 'Session-Timeout'){
+        return 'Session-Timeout : '.$value / 60 .' Menit';
+    }else if($attr == 'WISPr-Bandwidth-Max-Down'){
+        return 'Limit Download : '.$value / 1024 .'Kbps';
+    }else if($attr == 'WISPr-Bandwidth-Max-Up'){
+        return 'Limit Upload : '.$value / 1024 .'Kbps';
+    }else if($attr == 'WISPr-Redirection-URL'){
+        return 'URL Redirect : '.$value;
+    }else{
+        return null;
+    }
+}
 ?>
