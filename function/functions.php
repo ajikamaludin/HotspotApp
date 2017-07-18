@@ -344,6 +344,7 @@ function upload_user($file){
             }
 
         }
+        return true;
     }else{
         return false;
     } 
