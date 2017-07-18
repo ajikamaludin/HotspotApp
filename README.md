@@ -5,3 +5,4 @@ Web Based PHP native , Aplikasi Manajemen Berbasis Web FreeRadius2
 2. if Linux/BSD give permission
 3. config file in function/config_function.php
 4. create radius database and import sql file "asset/db/" sql file
+5. default login "admin" pass "admin"
