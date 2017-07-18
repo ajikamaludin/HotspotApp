@@ -2,6 +2,8 @@
 //Definisikan
 define('APPNAME','Hotspot Manager');
 define('NAMA_SEKOLAH','NAMA SEKOLAH');
+define('AKTIV_CODE', 'KOMUNITI2017');
+
 
 //Konsta MySQL/MariaDB Information
 define('HOST_URL', "localhost");

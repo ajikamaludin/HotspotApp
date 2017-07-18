@@ -14,7 +14,7 @@ include 'view/sidenav.php';
 <div class="container" >
     <ul class="collection with-header">
         <li class="collection-header"><h4>Hotspot Area : Web Based HotspotUser Management</h4></li>
-         <li class="collection-item">Aktiv : <?= NAMA_SEKOLAH ?></li>
+         <li class="collection-item">Aktiv : <?= NAMA_SEKOLAH ?> , Code : <?= AKTIV_CODE ?></li>
         <li class="collection-item">Users : <?= cek_jumlah_pengguna() ?></li>
         <li class="collection-item">Groups : <?= cek_jumlah_group() ?></li>
         <li class="collection-item">Login Log : <?= cek_jumlah_login() ?></li>
