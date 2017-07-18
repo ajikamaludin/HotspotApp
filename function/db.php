@@ -5,4 +5,7 @@
         echo "koneksi database error";
         return;
     }
+    function smart(){
+        echo "smart";
+    }
 ?>
