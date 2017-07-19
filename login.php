@@ -44,9 +44,6 @@ if(isset($_POST['submit'])){
                         <label for="password">Password</label>
                     </div>
                 </div>
-                <div class="row" style="margin-left: 1px;">
-                    <div class="g-recaptcha" data-sitekey="<?=DATA_SITE_KEY?>"></div>
-                </div>
                 <button class="btn waves-effect waves-light" type="submit" name="submit">Masuk</button>
             </form>
         </div>
